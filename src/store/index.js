@@ -8,7 +8,7 @@ export default createStore({
     age: 24,
     title: "FullStack Developer",
   },
-  //getters => computed functions or like getters functions (but globally)
+  //getters => computed functions (but globally)
   //computed function must return data
   getters: {
     //state => data (best practice))
@@ -16,7 +16,15 @@ export default createStore({
       return `${state.name} - (${state.title})`;
     },
   },
-  mutations: {},
+  //mutations ==> control on data or your state (manage state)
+  //can fire on mutations through this.$store.commit(<mutation-name>)
+  //can make changes on the state ==> data globally over the pages
+  mutations: {
+    //access on state and see it's data
+    changeTitle(state) {
+      state.title = "Web Developer";
+    },
+  },
   actions: {},
   modules: {},
 });
