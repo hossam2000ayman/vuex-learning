@@ -1,7 +1,6 @@
 <template>
   <div class="home">
     <h1>This is Home Page</h1>
-    <input type="number" v-model="product_id" />
     <button @click="getProductsHelper">Get Products</button>
     <ul class="product-list">
       {{
@@ -93,11 +92,6 @@
 import { mapState, mapActions, mapMutations, mapGetters } from "vuex";
 
 export default {
-  data() {
-    return {
-      product_id: 0,
-    };
-  },
   //state , getters in computed option
   computed: {
     //map state required name of modules
