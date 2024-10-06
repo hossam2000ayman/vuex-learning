@@ -1,11 +1,14 @@
 import { createStore } from "vuex";
-//centralized store
+//vuex store ==> centralized store
 export default createStore({
-  //data
-  state: {},
+  //options of state management
+  //state => declare the data (globally) over all the pages
+  state: {
+    name: "Hossam AL-Badry",
+    age: 24,
+  },
   getters: {},
   mutations: {},
-  //methods
   actions: {},
   modules: {},
 });

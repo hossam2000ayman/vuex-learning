@@ -1,18 +1,22 @@
 <template>
   <div class="home">
-    <img alt="Vue logo" src="../assets/logo.png" />
-    <HelloWorld msg="Welcome to Your Vue.js App" />
+    <h1>This is Home Page</h1>
+    <h2>your name is {{ this.$store.state.name }}</h2>
+    <h2>your age is {{ this.$store.state.age }}</h2>
+
+    <input type="text" v-model="this.$store.state.name" />
   </div>
 </template>
 
 <script>
-// @ is an alias to /src
-import HelloWorld from "@/components/HelloWorld.vue";
-
 export default {
   name: "HomeView",
-  components: {
-    HelloWorld,
-  },
+  // data() {
+  //declared locally
+  // return {
+  //   name: "Hossam AlBadry",
+  //   age: 24,
+  // };
+  // },
 };
 </script>
