@@ -1,10 +1,14 @@
 <template>
   <div class="home">
     <h1>This is Home Page</h1>
-    <button @click="this.$store.dispatch('doGetProducts')">Get Products</button>
+    <input type="number" v-model="product_id" />
+    <button @click="getProductsHelper">Get Products</button>
     <ul class="product-list">
+      {{
+        getFirstProduct
+      }}
       <li
-        v-for="product in this.$store.state.ProductsModule.products"
+        v-for="product in ProductsModule.products"
         :key="product.id"
         class="product-item"
       >
@@ -85,7 +89,32 @@
 </template>
 
 <script>
-export default {};
+//vuex Helpers
+import { mapState, mapActions, mapMutations, mapGetters } from "vuex";
+
+export default {
+  data() {
+    return {
+      product_id: 0,
+    };
+  },
+  //state , getters in computed option
+  computed: {
+    //map state required name of modules
+    //map state can be achieved through the actions ("dispatch")
+    ...mapState(["ProductsModule"]),
+    ...mapGetters(["getFirstProduct"]),
+  },
+  // mutations , actions in methods option
+  methods: {
+    ...mapMutations(["getProducts"]),
+    ...mapActions(["doGetProducts"]),
+    async getProductsHelper() {
+      await this.doGetProducts(); //action => mutation => state + modules
+      console.log("Products from Home Page", this.ProductsModule.products);
+    },
+  },
+};
 </script>
 <style scoped>
 .product-list {

@@ -8,6 +8,9 @@ export default {
   //computed function must return data
   getters: {
     //state => data (best practice))
+    getFirstProduct(state) {
+      return state.products[0];
+    },
   },
   //mutations ==> control on data or your state (manage state)
   //we cannot access on the state and modify on it except through mutations

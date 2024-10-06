@@ -7,7 +7,7 @@ export default createStore({
   mutations: {},
   actions: {},
   modules: {
-    //you can access on this module through the state like 
+    //you can access on this module through the state like
     //this.$store.state.ProductsModule.<key-inside-the-state>
     ProductsModule,
   },
