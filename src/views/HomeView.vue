@@ -1,28 +1,51 @@
 <template>
   <div class="home">
     <h1>This is Home Page</h1>
-    <!-- vuex not the work way to access on state directly and change it using two way bind -->
-    <!-- but we can do this access and change the data by using mutations methods instead for access state directly -->
-    <!-- so to keep our state is safe and the change of this state will occur only inside the store and avoid other modification on state from outside -->
-    <!-- here is the idea of "Strict Mood" -->
-    <!-- so instead for doing this -->
-    <h3>State Counter :: {{ productsModule.counter }}</h3>
-    <input type="number" v-model="productsModule.counter" />
-    <!-- do this  -->
-    <h3>Mutation Counter :: {{ counter }}</h3>
-    <input type="number" v-model="counter" />
+    <h2>State count is :: {{ count }}</h2>
+    <h2>Getter count is :: {{ getterCountStore }}</h2>
+    <button @click="increaseAction">Increase Action</button>
+    <button @click="decreaseAction">Decrease Action</button>
+    <hr />
+    <div v-html="getterUserStore"></div>
+    <button v-on:click="increaseAgeAction">Increase Age Action</button>
+    <button v-on:click="decreaseAgeAction">Decrease Age Action</button>
   </div>
 </template>
 
-<script setup>
-import { computed } from "vue";
-import { useStore } from "vuex";
+<script>
+import { counterStore } from "@/store/counter-store";
+import { userStore } from "@/store/user-store";
+import { mapActions, mapState } from "pinia";
 
-const store = useStore();
-const productsModule = store.state.ProductsModule;
+export default {
+  computed: {
+    ...mapState(counterStore, ["count"]),
+    // ...mapState(counterStore, {
+    //   myCount: (state) => state.count,
+    // }),
 
-const counter = computed({
-  get: () => productsModule.counter,
-  set: (value) => store.commit("updateCounter", value),
-});
+    ...mapState(userStore, ["user"]),
+    // ...mapState(userStore, {
+    //   myUser: (state) => state.user,
+    // }),
+
+    getterCountStore() {
+      return counterStore().countPlusOne;
+    },
+
+    getterUserStore() {
+      return userStore().getUserDetails;
+    },
+  },
+
+  methods: {
+    ...mapActions(counterStore, ["increaseAction", "decreaseAction"]),
+    ...mapActions(userStore, ["increaseAgeAction", "decreaseAgeAction"]),
+  },
+  mounted() {
+    // console.log("Count :: ", this.count);
+    // console.log("User :: ", this.user);
+    // console.log(counterStore().increment);
+  },
+};
 </script>
