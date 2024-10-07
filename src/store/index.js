@@ -8,4 +8,5 @@ export default createStore({
   modules: {
     ProductsModule,
   },
+  strict: true,
 });

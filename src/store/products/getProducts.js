@@ -14,6 +14,9 @@ export default {
     decreaseCounter(state) {
       state.counter--;
     },
+    updateCounter(state, newValue) {
+      state.counter = newValue;
+    },
   },
   actions: {
     increaseAction(context) {
