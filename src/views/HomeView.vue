@@ -1,39 +1,29 @@
 <template>
   <div class="home">
     <h1>This is Home Page</h1>
-    <!-- <h2>{{ this.$store.state.ProductsModule.name }}</h2> -->
-    <!-- <h2>{{ ProductsModule.name }}</h2> -->
-    <!-- <h2>User is {{ this.$store.getters.addTitle }}</h2> -->
-    <!-- <h2>User is {{ addTitle }}</h2> -->
-    <!-- <h2>Name is {{ this.$store.state.ProductsModule.name }}</h2> -->
-    <!-- <button @click="this.$store.commit('changeName')">Change Name</button> -->
-    <!-- <button @click="changeName">Change Name</button> -->
 
-    <!-- <h2>User is :: {{ this.$store.getters.addTitle }}</h2> -->
-
-    <!-- <button @click="this.$store.dispatch('doChangeTitle')">Change Title</button> -->
-    <button @click="doChangeTitle">Change Title</button>
+    <h2>Counter is :: {{ productsModule.counter }}</h2>
+    <h2>Getters is :: {{ getters.multiplyCounter }}</h2>
+    <button @click="store.commit('increaseCounter')">Mutation Increase</button>
+    <button @click="store.commit('decreaseCounter')">Mutation Decrease</button>
+    <br />
+    <br />
+    <button @click="store.dispatch('increaseAction')">Action Increase</button>
+    <button @click="store.dispatch('decreaseAction')">Action Decrease</button>
   </div>
 </template>
 
-<script>
-// import { mapState } from "vuex";
-// import { mapGetters } from "vuex";
-// import { mapMutations } from "vuex";
-import { mapActions } from "vuex";
-export default {
-  // computed: {
-  //   ...mapState(["ProductsModule"]),
-  // },
-  // computed: {
-  //   ...mapGetters(["addTitle"]),
-  // },
-  // methods: {
-  //   ...mapMutations(["changeName"]),
-  // },
+<script setup>
+import { useStore } from "vuex";
 
-  methods: {
-    ...mapActions(["doChangeTitle"]),
-  },
-};
+const store = useStore();
+console.log("store :: ", store);
+const productsModule = store.state.ProductsModule;
+console.log("ProductsModule :: ", productsModule);
+const getters = store.getters;
+console.log("getters :: ", getters);
+
+//you can access on mutation or action through
+// commit <==> mutation , dispatch <==> action
+//observation that the action is one to many relationship with mutations
 </script>

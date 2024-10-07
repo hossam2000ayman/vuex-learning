@@ -1,30 +1,26 @@
 export default {
   state: {
-    name: "Hossam AlBadry",
-    title: "Software Engineer",
+    counter: 0,
   },
   getters: {
-    addTitle(state) {
-      return `${state.name} ( ${state.title} )`;
+    multiplyCounter(state) {
+      return state.counter * 2;
     },
   },
   mutations: {
-    changeName(state) {
-      state.name = "John Doe";
+    increaseCounter(state) {
+      state.counter++;
     },
-
-    changeTitle(state, newTitle) {
-      state.title = newTitle;
+    decreaseCounter(state) {
+      state.counter--;
     },
   },
   actions: {
-    doChangeTitle(context) {
-      context.commit("changeTitle", "Full Stack Developer");
+    increaseAction(context) {
+      context.commit("increaseCounter");
+    },
+    decreaseAction(context) {
+      context.commit("decreaseCounter");
     },
   },
 };
-/**
- *
- *
- *
- */
