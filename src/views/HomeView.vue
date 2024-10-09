@@ -1,6 +1,7 @@
 <template>
   <div class="home">
     <h1>This is Home Page</h1>
+    <h1>Strict Mood</h1>
     <!-- vuex not the work way to access on state directly and change it using two way bind -->
     <!-- but we can do this access and change the data by using mutations methods instead for access state directly -->
     <!-- so to keep our state is safe and the change of this state will occur only inside the store and avoid other modification on state from outside -->
