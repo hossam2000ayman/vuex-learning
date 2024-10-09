@@ -19,8 +19,11 @@ import { mapActions, mapState } from "pinia";
 
 export default {
   computed: {
+    //1st way
     ...mapState(counterStore, ["count"]),
+    //2nd way (in case if you want to change the name of the state on retrieve the data)
     // ...mapState(counterStore, {
+    //  //computed functions called myCount and then return the state object
     //   myCount: (state) => state.count,
     // }),
 
