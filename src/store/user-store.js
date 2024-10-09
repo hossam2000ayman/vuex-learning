@@ -22,5 +22,12 @@ export const userStore = defineStore("user-store", {
     decreaseAgeAction() {
       this.user.age--;
     },
+
+    changeNameAction() {
+      this.user.name = "Hossam AlBadry";
+    },
+    changeEmailAction() {
+      this.user.email = "hossam@gmail.com";
+    },
   },
 });

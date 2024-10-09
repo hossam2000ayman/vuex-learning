@@ -1,54 +1,40 @@
 <template>
   <div class="home">
     <h1>This is Home Page</h1>
-    <h2>State count is :: {{ count }}</h2>
-    <h2>Getter count is :: {{ getterCountStore }}</h2>
-    <button @click="increaseAction">Increase Action</button>
-    <button @click="decreaseAction">Decrease Action</button>
+    <h5>State Count is :: {{ count }}</h5>
+    <h5>Getter Count is :: {{ countPlusOne }}</h5>
+    <button v-on:click="increment">Increase</button>
+    <button v-on:click="decrement">Decrease</button>
+    <button @click="_counterStore.$reset">Reset Counter State</button>
     <hr />
-    <div v-html="getterUserStore"></div>
-    <button v-on:click="increaseAgeAction">Increase Age Action</button>
-    <button v-on:click="decreaseAgeAction">Decrease Age Action</button>
+    <h4 v-html="getUserDetails"></h4>
+    <button @click="changeName">Change Name</button>
+    <button @click="changeEmail">Change Email</button>
+    <button @click="_userStore.$reset">Reset User State</button>
   </div>
 </template>
 
-<script>
+<script setup>
 import { counterStore } from "@/store/counter-store";
 import { userStore } from "@/store/user-store";
-import { mapActions, mapState } from "pinia";
+import { storeToRefs } from "pinia";
 
-export default {
-  computed: {
-    //1st way
-    ...mapState(counterStore, ["count"]),
-    //2nd way (in case if you want to change the name of the state on retrieve the data)
-    // ...mapState(counterStore, {
-    //  //computed functions called myCount and then return the state object
-    //   myCount: (state) => state.count,
-    // }),
+// import { userStore } from "@/store/user-store";
+const _userStore = userStore();
+const _counterStore = counterStore();
+//extract == destructuring the data inside the store
+// const { state , getter }
+// const { getUserDetails } = _userStore;
+//in that case it's not reactive
+// const { count, countPlusOne } = _counterStore;
+//how to make the state object is reactive on update it's values
+const { count, countPlusOne } = storeToRefs(_counterStore);
+const { getUserDetails } = storeToRefs(_userStore);
 
-    ...mapState(userStore, ["user"]),
-    // ...mapState(userStore, {
-    //   myUser: (state) => state.user,
-    // }),
+//how to invoke functions in actions
+const increment = _counterStore.increaseAction;
+const decrement = _counterStore.decreaseAction;
 
-    getterCountStore() {
-      return counterStore().countPlusOne;
-    },
-
-    getterUserStore() {
-      return userStore().getUserDetails;
-    },
-  },
-
-  methods: {
-    ...mapActions(counterStore, ["increaseAction", "decreaseAction"]),
-    ...mapActions(userStore, ["increaseAgeAction", "decreaseAgeAction"]),
-  },
-  mounted() {
-    // console.log("Count :: ", this.count);
-    // console.log("User :: ", this.user);
-    // console.log(counterStore().increment);
-  },
-};
+const changeName = _userStore.changeNameAction;
+const changeEmail = _userStore.changeEmailAction;
 </script>

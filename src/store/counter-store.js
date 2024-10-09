@@ -18,5 +18,10 @@ export const counterStore = defineStore("counter-store", {
     decreaseAction() {
       this.count--;
     },
+    //I can also make overriding the built in reset function of store
+    $reset() {
+      console.log("$reset fired (counter-store)");
+      this.count = 2;
+    },
   },
 });
